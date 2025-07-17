@@ -51,4 +51,30 @@ public class ArticleController {
         PageBean<Article> pb = articleService.list(pageNum, pageSize, categoryId, state);
         return Result.success(pb);
     }
+
+
+    @PutMapping
+    public Result<String> update(@RequestBody @Validated Article article) {
+        articleService.update(article);
+        return Result.success("更新文章成功");
+    }
+
+    @GetMapping("/detail")
+    public Result<Article> detail(Integer id) {
+        Article article = articleService.findById(id);
+        if (article == null){
+            return Result.error("文章不存在");
+        }
+        return Result.success(article);
+    }
+
+    @DeleteMapping
+    public Result<String> delete(Integer id) {
+        if(articleService.findById(id) == null){
+            return Result.error("文章不存在");
+        }
+
+        articleService.delete(id);
+        return Result.success("删除文章成功");
+    }
 }
