@@ -11,12 +11,15 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @program: big-event
@@ -32,6 +35,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private StringRedisTemplate stringredistemplate ;
     @PostMapping("/register")
     public Result register(@Validated User user) {
         /* if (username != null && password != null && username.length() > 5 && password.length() > 5  && username.length() < 16 && password.length() < 16) {
@@ -62,6 +67,8 @@ public class UserController {
             claims.put("id", l.getId());
             claims.put("username", l.getUsername());
             String token = JwtUtil.genToken(claims);
+            ValueOperations<String, String> operations = stringredistemplate.opsForValue();
+            operations.set(token,token,1, TimeUnit.HOURS);
             return Result.success(token);
         }
         return Result.error("密码错误");
@@ -92,7 +99,10 @@ public class UserController {
     }
 
     @PatchMapping("/updatePwd")
-    public Result updatePwd(@RequestBody  @Validated UpdatePwd updatePwd){
+    public Result updatePwd(@RequestBody  @Validated UpdatePwd updatePwd,@RequestHeader(name = "Authorization") String token){
+        ValueOperations<String, String> operations = stringredistemplate.opsForValue();
+        operations.getOperations().delete(token);
+
         String oldPwd = updatePwd.getOldPwd();
         String newPwd = updatePwd.getNewPwd();
         String rePwd = updatePwd.getRePwd();
