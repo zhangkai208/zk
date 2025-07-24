@@ -16,7 +16,7 @@ const imgUrl= ref(userInfoStore.info.userPic || avatar)
 
 const uploadSussess = (result) => {
    
-        imgUrl.value = result.data
+    imgUrl.value = result.data
     
 }
 
