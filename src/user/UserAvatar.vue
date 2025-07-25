@@ -22,9 +22,9 @@ const uploadSussess = (result) => {
 
 const updateAvatar = async () => {
     console.log('准备更新的头像地址：', imgUrl.value)
-    let result = await updateAvatarService({
-        avatarUrl: imgUrl.value
-    })
+    let result = await updateAvatarService(
+        imgUrl.value
+    )
     console.log('更新头像返回结果：', result)
     if(result.code === 0) {
         ElMessage.success(result.msg ? result.msg : '修改成功')
