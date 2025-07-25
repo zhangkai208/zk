@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import useUserInfoStore from '@/stores/userinfo'
 import { updatePasswordService } from '@/api/user.js'
 import { ElMessage } from 'element-plus'
+import router from '@/router'
+
 
 const userInfoStore = useUserInfoStore()
 const userInfo = ref({
@@ -75,6 +77,7 @@ const updatepassword = async () => {
 
         if(result.code === 0) {
             ElMessage.success(result.msg ? result.msg : '修改成功')
+
         } else {
             ElMessage.error(result.msg ? result.msg : '修改失败')
         }
