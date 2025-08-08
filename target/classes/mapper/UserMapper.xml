@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mp.mapper.UserMapper">
+    <insert id="saveUser" parameterType="com.itheima.mp.domain.po.User">
+        INSERT INTO `tb_user` (`id`, `username`, `password`, `phone`, `info`, `balance`)
+        VALUES
+        (#{id}, #{username}, #{password}, #{phone}, #{info}, #{balance});
+    </insert>
+    
+    <!-- 批量插入用户数据 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO `tb_user` (`username`, `password`, `phone`, `info`, `status`, `balance`, `create_time`, `update_time`)
+        VALUES
+        <foreach collection="users" item="user" separator=",">
+            (
+                #{user.username},
+                #{user.password},
+                #{user.phone},
+                #{user.info},
+                #{user.status},
+                #{user.balance},
+                #{user.createTime},
+                #{user.updateTime}
+            )
+        </foreach>
+    </insert>
+    
+    <update id="updateUser" parameterType="com.itheima.mp.domain.po.User">
+        UPDATE `tb_user`
+        <set>
+            <if test="username != null">
+                `username`=#{username}
+            </if>
+            <if test="password != null">
+                `password`=#{password}
+            </if>
+            <if test="phone != null">
+                `phone`=#{phone}
+            </if>
+            <if test="info != null">
+                `info`=#{info}
+            </if>
+            <if test="status != null">
+                `status`=#{status}
+            </if>
+            <if test="balance != null">
+                `balance`=#{balance}
+            </if>
+        </set>
+        WHERE `id`=#{id};
+    </update>
+    <delete id="deleteUser" parameterType="com.itheima.mp.domain.po.User">
+        DELETE FROM tb_user WHERE id = #{id}
+    </delete>
+
+    <select id="queryUserById" resultType="com.itheima.mp.domain.po.User">
+        SELECT *
+        FROM tb_user
+        WHERE id = #{id}
+    </select>
+
+    <select id="queryUserByIds" resultType="com.itheima.mp.domain.po.User">
+        SELECT *
+        FROM tb_user
+        <if test="ids != null">
+            WHERE id IN
+            <foreach collection="ids" open="(" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </if>
+        LIMIT 10
+    </select>
+
+
+    <update id="updateBalanceByIds">
+        UPDATE  tb_user SET balance = balance - #{amount}  ${ew.customSqlSegment}
+    </update>
+
+    <update id="deductMoeyById">
+        UPDATE  tb_user SET balance = balance - #{amount} WHERE id = #{id}
+    </update>
+</mapper>
