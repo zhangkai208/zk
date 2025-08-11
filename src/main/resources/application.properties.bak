@@ -1,0 +1,5 @@
+spring.application.name=jwt-dome
+
+# 禁用 FreeMarker 自动配置，避免类路径残留 freemarker 时触发启动失败
+spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration
+
