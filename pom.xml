@@ -6,6 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.8</version>
+<<<<<<< HEAD
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -13,6 +14,14 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>jwt-dome</name>
     <description>jwt-dome</description>
+=======
+    </parent>
+    <groupId>com.zk</groupId>
+    <artifactId>redis-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>redis-demo</name>
+    <description>redis-demo</description>
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
     <url/>
     <licenses>
         <license/>
@@ -31,6 +40,7 @@
     </properties>
     <dependencies>
         <dependency>
+<<<<<<< HEAD
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
@@ -40,10 +50,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
+=======
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
@@ -57,6 +70,18 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.7</version>
+=======
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -65,6 +90,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+<<<<<<< HEAD
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
@@ -94,12 +120,32 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
             <version>3.5.7</version>
+=======
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--Redis依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--连接池依赖-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+<<<<<<< HEAD
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
@@ -110,15 +156,42 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
+=======
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+<<<<<<< HEAD
                             <version>1.18.30</version>
+=======
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
         </plugins>
     </build>
     </project>
+=======
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+>>>>>>> e6c950fdbdb3d6a876ee89ca8687799428e41d86
