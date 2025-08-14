@@ -9,7 +9,7 @@ public class Application2 {
         //获取ioc容器
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         //获取bean
-        BookService bookService = (BookService) context.getBean("bookService");
+        BookService bookService = (BookService) context.getBean("book");
         bookService.save();
 
     }
