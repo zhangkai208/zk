@@ -1,13 +1,33 @@
 package com.example.spring.dao.impl;
 
 import com.example.spring.dao.BookDao;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 
-public class BookDaoImpl implements BookDao {
+public class BookDaoImpl implements BookDao, InitializingBean, DisposableBean {
+    @Override
+    public void save(){
+        System.out.println("book dao save..."); }
     public BookDaoImpl(){
         System.out.println("book dao impl constructor...");
     }
+
     @Override
-    public void save() {
-        System.out.println("book dao save...");
+    public void destroy() throws Exception {
+        System.out.println("book dao destroy...");
     }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("book dao init...");
+    }
+
+
+    /*public void init(){
+        System.out.println("book dao init...");
+    }
+
+    public void destroy(){
+        System.out.println("book dao destroy...");
+    }*/
 }

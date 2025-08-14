@@ -3,10 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--<bean class="com.example.spring.service.impl.BookServiceImpl" id="bookService" name="service,book" scope="prototype">
+    <bean class="com.example.spring.service.impl.BookServiceImpl" id="bookService" name="service,book" scope="prototype">
         <property name="bookDao" ref="bookDao" />
     </bean>
-    <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" />-->
+    <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" />
+    <!--<bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" init-method="init" destroy-method="destroy"/>-->
 
     <!--<bean id="orderDao" class="com.example.spring.factory.OrderDaoFactory" factory-method="getOrderDao"/>-->
 
@@ -14,5 +15,5 @@
 
     <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao" />-->
 
-    <bean id="userDao" class="com.example.spring.factory.UserDaoFactoryBean" />
+    <!--<bean id="userDao" class="com.example.spring.factory.UserDaoFactoryBean" />-->
 </beans>
