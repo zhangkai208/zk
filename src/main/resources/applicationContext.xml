@@ -10,7 +10,9 @@
 
     <!--<bean id="orderDao" class="com.example.spring.factory.OrderDaoFactory" factory-method="getOrderDao"/>-->
 
-    <bean id="userFactory" class="com.example.spring.factory.UserDaoFactory" />
+    <!--<bean id="userFactory" class="com.example.spring.factory.UserDaoFactory" />
 
-    <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao" />
+    <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao" />-->
+
+    <bean id="userDao" class="com.example.spring.factory.UserDaoFactoryBean" />
 </beans>
