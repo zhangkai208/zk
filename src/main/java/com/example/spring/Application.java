@@ -10,10 +10,11 @@ import com.example.spring.service.impl.BookServiceImpl;
 public class Application {
 
     public static void main(String[] args) {
-        BookService bookService = new BookServiceImpl();
-        bookService.save();
+        /*BookService bookService = new BookServiceImpl();
+        bookService.save();*/
 
         BookDao bookDao = new BookDaoImpl();
+        System.out.println(bookDao);
         bookDao.save();
     }
 
