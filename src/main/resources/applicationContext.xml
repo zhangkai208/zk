@@ -5,8 +5,16 @@
 
     <bean class="com.example.spring.service.impl.BookServiceImpl" id="bookService" name="service,book" scope="prototype">
         <property name="bookDao" ref="bookDao" />
+        <property name="userDao" ref="userDao" />
     </bean>
-    <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" />
+    <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" >
+            <property name="connectionNum" value="10" />
+            <property name="databaseName" value="mysql" />
+        </bean>
+    <bean class="com.example.spring.dao.impl.UserDaoImpl" id="userDao" />
+
+
+
     <!--<bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" init-method="init" destroy-method="destroy"/>-->
 
     <!--<bean id="orderDao" class="com.example.spring.factory.OrderDaoFactory" factory-method="getOrderDao"/>-->
