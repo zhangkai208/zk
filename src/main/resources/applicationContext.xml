@@ -8,5 +8,9 @@
     </bean>
     <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" />-->
 
-    <bean id="orderDao" class="com.example.spring.factory.OrderDaoFactory" factory-method="getOrderDao"/>
+    <!--<bean id="orderDao" class="com.example.spring.factory.OrderDaoFactory" factory-method="getOrderDao"/>-->
+
+    <bean id="userFactory" class="com.example.spring.factory.UserDaoFactory" />
+
+    <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao" />
 </beans>
