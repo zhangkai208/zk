@@ -9,7 +9,7 @@
         &lt;!&ndash;<constructor-arg name="bookDao" ref="bookDao" />
         <constructor-arg name="userDao" ref="userDao" />&ndash;&gt;
     </bean>-->
-    <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" >
+    <!--<bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" >
         <property name="array">
             <array>
                 <value>1</value>
@@ -44,7 +44,7 @@
                         <prop key="2">2</prop>
                         <prop key="3">3</prop>
                 </props>
-        </property>
+        </property>-->
             <!--<property name="connectionNum" value="10" />
             <property name="databaseName" value="mysql" />-->
         <!--<constructor-arg type="int" value="10" />
@@ -54,8 +54,8 @@
         <!--<constructor-arg index="0" value="10" />
         <constructor-arg index="1" value="mysql" />-->
 
-        </bean>
-    <bean class="com.example.spring.dao.impl.UserDaoImpl" id="userDao" />
+        <!--</bean>
+    <bean class="com.example.spring.dao.impl.UserDaoImpl" id="userDao" />-->
 
 
 
@@ -68,4 +68,18 @@
     <bean id="userDao" factory-bean="userFactory" factory-method="getUserDao" />-->
 
     <!--<bean id="userDao" class="com.example.spring.factory.UserDaoFactoryBean" />-->
+
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+            <property name="username" value="root"/>
+            <property name="password" value="123456"/>
+        </bean>-->
+
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
 </beans>
