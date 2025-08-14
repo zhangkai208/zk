@@ -3,13 +3,48 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.example.spring.service.impl.BookServiceImpl" id="bookService" name="service,book" scope="prototype" autowire="byType">
-        <!--<property name="bookDao" ref="bookDao" />
-        <property name="userDao" ref="userDao" />-->
-        <!--<constructor-arg name="bookDao" ref="bookDao" />
-        <constructor-arg name="userDao" ref="userDao" />-->
-    </bean>
+    <!--<bean class="com.example.spring.service.impl.BookServiceImpl" id="bookService" name="service,book" scope="prototype" autowire="byType">
+        &lt;!&ndash;<property name="bookDao" ref="bookDao" />
+        <property name="userDao" ref="userDao" />&ndash;&gt;
+        &lt;!&ndash;<constructor-arg name="bookDao" ref="bookDao" />
+        <constructor-arg name="userDao" ref="userDao" />&ndash;&gt;
+    </bean>-->
     <bean class="com.example.spring.dao.impl.BookDaoImpl" id="bookDao" >
+        <property name="array">
+            <array>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </array>
+        </property>
+        <property name="list">
+                <list>
+                        <value>1</value>
+                        <value>2</value>
+                        <value>3</value>
+                </list>
+        </property>
+        <property name="map">
+                <map>
+                        <entry key="1" value="1" />
+                        <entry key="2" value="2" />
+                        <entry key="3" value="3" />
+                </map>
+        </property>
+        <property name="set">
+                <set>
+                        <value>1</value>
+                        <value>2</value>
+                        <value>3</value>
+                </set>
+        </property>
+        <property name="properties">
+                <props>
+                        <prop key="1">1</prop>
+                        <prop key="2">2</prop>
+                        <prop key="3">3</prop>
+                </props>
+        </property>
             <!--<property name="connectionNum" value="10" />
             <property name="databaseName" value="mysql" />-->
         <!--<constructor-arg type="int" value="10" />
