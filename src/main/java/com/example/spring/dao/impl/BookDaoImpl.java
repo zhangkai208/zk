@@ -7,17 +7,17 @@ import org.springframework.beans.factory.InitializingBean;
 public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean */{
 
 
-    private int connectionNum;
-    private String databaseName;
+    /*private int connectionNum;
+    private String databaseName;*/
     @Override
     public void save(){
-        System.out.println("book dao save..."+connectionNum+","+databaseName);
+        System.out.println("book dao save..."/*+connectionNum+","+databaseName*/);
     }
 
-    public BookDaoImpl(int connectionNum, String databaseName) {
+    /*public BookDaoImpl(int connectionNum, String databaseName) {
         this.connectionNum = connectionNum;
         this.databaseName = databaseName;
-    }
+    }*/
     /*public void setConnectionNum(int connectionNum) {
         this.connectionNum = connectionNum;
     }

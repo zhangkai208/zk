@@ -13,7 +13,7 @@ public class Application {
         /*BookService bookService = new BookServiceImpl();
         bookService.save();*/
 
-        BookDao bookDao = new BookDaoImpl(100, "mysql");
+        BookDao bookDao = new BookDaoImpl(/*100, "mysql"*/);
         System.out.println(bookDao);
         bookDao.save();
     }
