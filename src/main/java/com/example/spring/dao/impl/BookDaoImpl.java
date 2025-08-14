@@ -14,13 +14,17 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("book dao save..."+connectionNum+","+databaseName);
     }
 
-    public void setConnectionNum(int connectionNum) {
+    public BookDaoImpl(int connectionNum, String databaseName) {
+        this.connectionNum = connectionNum;
+        this.databaseName = databaseName;
+    }
+    /*public void setConnectionNum(int connectionNum) {
         this.connectionNum = connectionNum;
     }
 
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
-    }
+    }*/
 /*public BookDaoImpl(){
         System.out.println("book dao impl constructor...");
     }*/
