@@ -10,7 +10,9 @@ public class Application2 {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         //获取bean
         BookService bookService = (BookService) context.getBean("book");
+        BookService bookService1 = (BookService) context.getBean("book");
         bookService.save();
-
+        System.out.println(bookService);
+        System.out.println(bookService1);
     }
 }
