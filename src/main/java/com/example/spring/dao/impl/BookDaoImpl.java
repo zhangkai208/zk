@@ -3,10 +3,15 @@ package com.example.spring.dao.impl;
 import com.example.spring.dao.BookDao;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.*;
-@Component("bookDao")
+@Repository
+@Scope("singleton")
 public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean */{
 /*
     private int[] array;
@@ -73,12 +78,12 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("book dao init...");
     }
 */
-
-    /*public void init(){
+    @PostConstruct
+    public void init(){
         System.out.println("book dao init...");
     }
-
+    @PreDestroy
     public void destroy(){
         System.out.println("book dao destroy...");
-    }*/
+    }
 }
