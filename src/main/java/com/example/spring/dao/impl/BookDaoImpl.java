@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.*;
-@Repository
+@Repository("bookDao")
 @Scope("singleton")
 public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean */{
 /*
@@ -78,12 +78,12 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("book dao init...");
     }
 */
-    @PostConstruct
+    /*@PostConstruct
     public void init(){
         System.out.println("book dao init...");
     }
     @PreDestroy
     public void destroy(){
         System.out.println("book dao destroy...");
-    }
+    }*/
 }

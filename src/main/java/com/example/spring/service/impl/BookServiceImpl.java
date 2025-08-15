@@ -3,6 +3,8 @@ package com.example.spring.service.impl;
 import com.example.spring.dao.BookDao;
 import com.example.spring.dao.UserDao;
 import com.example.spring.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookServiceImpl implements BookService {
     /*private BookDao bookDao = new BookDaoImpl();*/
+    @Autowired
+    @Qualifier("bookDao")
     private BookDao bookDao;
 
     /*public BookServiceImpl(BookDao bookDao, UserDao userDao) {
@@ -25,9 +29,9 @@ public class BookServiceImpl implements BookService {
         /*userDao.save();*/
     }
 
-    public void setBookDao(BookDao bookDao) {
+    /*public void setBookDao(BookDao bookDao) {
         this.bookDao = bookDao;
-    }
+    }*/
 
    /* public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
