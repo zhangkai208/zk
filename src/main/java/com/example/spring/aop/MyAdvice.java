@@ -16,6 +16,14 @@ public class MyAdvice {
     private  void  pt2(){
 
     }
+    @Pointcut("execution(* *.save(..))")
+    private  void  pt3(){
+
+    }
+    @Pointcut("execution(* *.delete(..))")
+    private  void  pt4(){
+
+    }
 
    /* @Before("pt()")
     public void method(){
@@ -30,19 +38,24 @@ public class MyAdvice {
     public void after(){
         System.out.println("after");
     }*/
-    @Around("pt2()")
-    public Object  around(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("pt() || pt4()")
+    public void   around(ProceedingJoinPoint pjp) throws Throwable {
+        Long start = System.currentTimeMillis();
         System.out.println("around before");
-        Object proceed = pjp.proceed();
+        for (int i = 0; i < 10; i++) {
+            Object proceed = pjp.proceed();
+
+        }
+        Long end = System.currentTimeMillis();
         System.out.println("around after");
-        return  proceed;
+        System.out.println("执行时间：" + (end - start));
     }
-    @AfterReturning("pt2()")
+    /*@AfterReturning("pt2()")
     public void  afterReturning(){
         System.out.println("afterReturning");
     }
     @AfterThrowing("pt2()")
     public void  afterThrowing(){
         System.out.println("afterThrowing");
-    }
+    }*/
 }

@@ -55,7 +55,7 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("遍历Properties" + properties);*/
         /*System.out.println("book dao save..."+connectionNum+","+databaseName);*/
 
-        /*Long start = System.currentTimeMillis();
+        Long start = System.currentTimeMillis();
 
         for (int i = 0; i < 10; i++) {
             System.out.println("book dao save...");
@@ -63,9 +63,9 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
 
         Long end = System.currentTimeMillis();
 
-        System.out.println("执行时间：" + (end - start));*/
-        System.out.println(System.currentTimeMillis());
-        System.out.println("book dao save...");
+        System.out.println("执行时间：" + (end - start));
+        /*System.out.println(System.currentTimeMillis());
+        System.out.println("book dao save...");*/
     }
 
     public  int select(){
