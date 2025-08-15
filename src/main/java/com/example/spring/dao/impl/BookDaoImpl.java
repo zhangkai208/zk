@@ -3,6 +3,7 @@ package com.example.spring.dao.impl;
 import com.example.spring.dao.BookDao;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -39,9 +40,11 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
     public void setProperties(Properties properties) {
         this.properties = properties;
     }*/
+    @Value("10")
+    private int connectionNum;
+    @Value("${name}")
+    private String databaseName;
 
-    /*private int connectionNum;
-        private String databaseName;*/
     @Override
     public void save(){
         /*System.out.println("book dao save ...");
@@ -50,7 +53,7 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("遍历Set" + set);
         System.out.println("遍历Map" + map);
         System.out.println("遍历Properties" + properties);*/
-        System.out.println("book dao save..."/*+connectionNum+","+databaseName*/);
+        System.out.println("book dao save..."+connectionNum+","+databaseName);
     }
 
     /*public BookDaoImpl(int connectionNum, String databaseName) {
