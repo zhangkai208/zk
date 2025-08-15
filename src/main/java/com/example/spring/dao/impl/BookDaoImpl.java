@@ -68,8 +68,10 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("book dao save...");
     }
 
-    public  void select(){
+    public  int select(){
         System.out.println("book dao select...");
+        int i = 1/0;
+        return 100;
     }
     public  void  update(){
         System.out.println("book dao update...");
