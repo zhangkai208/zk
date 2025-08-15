@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyAdvice {
 
-    @Pointcut("execution(void com.example.spring.dao.impl.BookDaoImpl.update())")
+    @Pointcut("execution(* *.update(..))")
     private  void  pt(){
 
     }
