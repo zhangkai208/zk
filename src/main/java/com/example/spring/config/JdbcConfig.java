@@ -1,6 +1,8 @@
 package com.example.spring.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.example.spring.dao.BookDao;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
@@ -8,13 +10,23 @@ import javax.sql.DataSource;
 
 
 public class JdbcConfig {
+    @Value("root")
+    private String Username;
+    @Value("123456")
+    private String Password;
+    @Value("jdbc:mysql://localhost:3306/test")
+    private String Url;
+    @Value("com.mysql.jdbc.Driver")
+    private String DriverClassName;
+
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource(BookDao bookDao){
+        System.out.println(bookDao);
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        return (DataSource) dataSource;
+        dataSource.setUsername(Username);
+        dataSource.setPassword(Password);
+        dataSource.setUrl(Url);
+        dataSource.setDriverClassName(DriverClassName);
+        return dataSource;
     }
 }
