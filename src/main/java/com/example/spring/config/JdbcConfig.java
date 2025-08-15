@@ -4,11 +4,11 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.example.spring.dao.BookDao;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-
+@Configuration
 public class JdbcConfig {
     @Value("root")
     private String Username;
@@ -20,8 +20,7 @@ public class JdbcConfig {
     private String DriverClassName;
 
     @Bean
-    public DataSource dataSource(BookDao bookDao){
-        System.out.println(bookDao);
+    public DataSource dataSource(){
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setUsername(Username);
         dataSource.setPassword(Password);

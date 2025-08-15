@@ -40,10 +40,10 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
     public void setProperties(Properties properties) {
         this.properties = properties;
     }*/
-    @Value("10")
+    /*@Value("10")
     private int connectionNum;
     @Value("${name}")
-    private String databaseName;
+    private String databaseName;*/
 
     @Override
     public void save(){
@@ -53,9 +53,30 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
         System.out.println("遍历Set" + set);
         System.out.println("遍历Map" + map);
         System.out.println("遍历Properties" + properties);*/
-        System.out.println("book dao save..."+connectionNum+","+databaseName);
+        /*System.out.println("book dao save..."+connectionNum+","+databaseName);*/
+
+        /*Long start = System.currentTimeMillis();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println("book dao save...");
+        }
+
+        Long end = System.currentTimeMillis();
+
+        System.out.println("执行时间：" + (end - start));*/
+        System.out.println(System.currentTimeMillis());
+        System.out.println("book dao save...");
     }
 
+    public  void select(){
+        System.out.println("book dao select...");
+    }
+    public  void  update(){
+        System.out.println("book dao update...");
+    }
+    public void  delete(){
+        System.out.println("book dao delete...");
+    }
     /*public BookDaoImpl(int connectionNum, String databaseName) {
         this.connectionNum = connectionNum;
         this.databaseName = databaseName;
