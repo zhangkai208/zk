@@ -1,2 +1,4 @@
-com\example\springboot\controller\BookController.class
 com\example\springboot\SpringbootApplication.class
+com\example\springboot\domain\Enterprise.class
+META-INF\spring-configuration-metadata.json
+com\example\springboot\controller\BookController.class

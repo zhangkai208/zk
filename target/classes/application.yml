@@ -1,39 +1,67 @@
-spring:
-  profiles:
-    active: test
-
-
----
-#开发
+# 默认配置
 server:
   port: 8080
+
+enterprise:
+  name: default-name
+  age: 0
+  tel: default-tel
+  subject:
+    - default-subject
+
+---
+# 开发环境
 spring:
   config:
     activate:
       on-profile: dev
 
----
-#生产
 server:
-  port: 8081
-spring:
-  config:
-    activate:
-      on-profile: pro
----
-#测试
-server:
-  port: 8082
-spring:
-  config:
-    activate:
-      on-profile: test
+  port: 8080
 
 enterprise:
-  name: zk
+  name: dev-zk
   age: 18
   tel: 123456789
   subject:
     - math
     - english
     - chinese
+
+---
+# 生产环境
+spring:
+  config:
+    activate:
+      on-profile: pro
+
+server:
+  port: 8081
+
+enterprise:
+  name: pro-zk
+  age: 25
+  tel: 987654321
+  subject:
+    - java
+    - spring
+    - mysql
+
+---
+# 测试环境
+spring:
+  config:
+    activate:
+      on-profile: test
+
+server:
+  port: 8082
+
+enterprise:
+  name: test-zk
+  age: 20
+  tel: 555555555
+  subject:
+    - test-math
+    - test-english
+    - test-chinese
