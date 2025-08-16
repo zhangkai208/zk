@@ -1,5 +1,11 @@
 server:
-  port: 81
-logging:
-  level:
-    root: INFO
+  port: 8080
+
+enterprise:
+  name: zk
+  age: 18
+  tel: 123456789
+  subject:
+    - math
+    - english
+    - chinese
