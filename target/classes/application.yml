@@ -1,5 +1,33 @@
+spring:
+  profiles:
+    active: test
+
+
+---
+#开发
 server:
   port: 8080
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+#生产
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile: pro
+---
+#测试
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: test
 
 enterprise:
   name: zk
