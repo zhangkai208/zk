@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="294c8cb0-7847-48cf-b2c5-e8992e929a67" name="更改" comment="springboot">
+    <list default="true" id="294c8cb0-7847-48cf-b2c5-e8992e929a67" name="更改" comment="springboot的jar包启动">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/controller/BookController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/springboot/controller/BookController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/springboot/SpringbootApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/springboot/SpringbootApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +86,7 @@
       <workItem from="1755309632575" duration="578000" />
       <workItem from="1755310222939" duration="752000" />
       <workItem from="1755311109674" duration="665000" />
-      <workItem from="1755312799298" duration="3741000" />
+      <workItem from="1755312799298" duration="6150000" />
     </task>
     <task id="LOCAL-00001" summary="springboot">
       <option name="closed" value="true" />
@@ -99,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755314556575</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="springboot的jar包启动">
+      <option name="closed" value="true" />
+      <created>1755323226343</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1755323226343</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +112,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="springboot" />
-    <option name="LAST_COMMIT_MESSAGE" value="springboot" />
+    <MESSAGE value="springboot的jar包启动" />
+    <option name="LAST_COMMIT_MESSAGE" value="springboot的jar包启动" />
   </component>
 </project>
