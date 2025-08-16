@@ -7,4 +7,6 @@ public interface BookDao {
     public int select();
 
     public void delete();
+
+    public String findName(int id);
 }

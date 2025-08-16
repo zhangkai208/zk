@@ -79,6 +79,12 @@ public class BookDaoImpl implements BookDao/*, InitializingBean, DisposableBean 
     public void  delete(){
         System.out.println("book dao delete...");
     }
+
+    @Override
+    public String findName(int id) {
+        System.out.println("id:"+id);
+        return "null";
+    }
     /*public BookDaoImpl(int connectionNum, String databaseName) {
         this.connectionNum = connectionNum;
         this.databaseName = databaseName;
