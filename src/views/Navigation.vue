@@ -35,6 +35,26 @@
                 <template #title>导航四</template>
             </el-menu-item>
   </el-menu>
+
+  <h3>面包屑</h3>
+  <el-breadcrumb separator="/">
+  <el-breadcrumb-item>1</el-breadcrumb-item>
+  <el-breadcrumb-item>2</el-breadcrumb-item>
+  <el-breadcrumb-item><a href="#">3</a></el-breadcrumb-item>
+  </el-breadcrumb>
+
+  <h3>下拉菜单</h3>
+  <el-dropdown @command="userCommand">
+    <span>
+      个人中心<el-icon><MoreFilled /></el-icon>
+    </span>
+<template #dropdown>
+                <el-dropdown-menu>
+                    <el-dropdown-item command="order">订单</el-dropdown-item>
+                    <el-dropdown-item command="logout">退出</el-dropdown-item>
+                </el-dropdown-menu>
+            </template>
+  </el-dropdown>
   
 </template>
 <script setup>
@@ -44,6 +64,9 @@ import { ref , reactive} from 'vue'
             console.log("index", index, "indexPath", indexPath)
         }
 const defaultOpeneds = ref(["1","2"])
+ const userCommand = (command) => {
+            console.log("command", command)
+ }
 </script>
 
 
