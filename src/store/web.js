@@ -20,4 +20,8 @@ export const useWebStore = defineStore('web' , () => {
         users,
         add
     }
-})
+},
+{
+    persist: true
+}
+)
