@@ -77,7 +77,7 @@
 
 <script setup>
 import { ElMessageBox } from "element-plus"
-import { getCodeImg, register } from "@/api/login"
+import { register } from "@/api/login"
 
 const title = import.meta.env.VITE_APP_TITLE
 const router = useRouter()
@@ -112,13 +112,13 @@ const registerRules = {
   confirmPassword: [
     { required: true, trigger: "blur", message: "请再次输入您的密码" },
     { required: true, validator: equalToPassword, trigger: "blur" }
-  ],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+  ]
 }
 
-const codeUrl = ref("")
+// 验证码已移除
+
 const loading = ref(false)
-const captchaEnabled = ref(true)
+const captchaEnabled = ref(false)
 
 function handleRegister() {
   proxy.$refs.registerRef.validate(valid => {
@@ -134,25 +134,12 @@ function handleRegister() {
         }).catch(() => {})
       }).catch(() => {
         loading.value = false
-        if (captchaEnabled) {
-          getCode()
-        }
       })
     }
   })
 }
 
-function getCode() {
-  getCodeImg().then(res => {
-    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled
-    if (captchaEnabled.value) {
-      codeUrl.value = "data:image/gif;base64," + res.img
-      registerForm.value.uuid = res.uuid
-    }
-  })
-}
-
-getCode()
+// 验证码已移除
 </script>
 
 <style lang='scss' scoped>
@@ -218,3 +205,4 @@ getCode()
   padding-left: 12px;
 }
 </style>
+

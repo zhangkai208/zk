@@ -25,21 +25,7 @@
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
-      <el-form-item prop="code" v-if="captchaEnabled">
-        <el-input
-          v-model="loginForm.code"
-          size="large"
-          auto-complete="off"
-          placeholder="验证码"
-          style="width: 63%"
-          @keyup.enter="handleLogin"
-        >
-          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
-        </el-input>
-        <div class="login-code">
-          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
-        </div>
-      </el-form-item>
+      
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
       <el-form-item style="width:100%;">
         <el-button
@@ -65,9 +51,7 @@
 </template>
 
 <script setup>
-import { getCodeImg } from "@/api/login"
 import Cookies from "js-cookie"
-import { encrypt, decrypt } from "@/utils/jsencrypt"
 import useUserStore from '@/store/modules/user'
 
 const title = import.meta.env.VITE_APP_TITLE
@@ -80,20 +64,16 @@ const loginForm = ref({
   username: "admin",
   password: "admin123",
   rememberMe: false,
-  code: "",
-  uuid: ""
+  
 })
 
 const loginRules = {
   username: [{ required: true, trigger: "blur", message: "请输入您的账号" }],
-  password: [{ required: true, trigger: "blur", message: "请输入您的密码" }],
-  code: [{ required: true, trigger: "change", message: "请输入验证码" }]
+  password: [{ required: true, trigger: "blur", message: "请输入您的密码" }]
 }
 
-const codeUrl = ref("")
 const loading = ref(false)
-// 验证码开关
-const captchaEnabled = ref(true)
+// 验证码已移除
 // 注册开关
 const register = ref(false)
 const redirect = ref(undefined)
@@ -106,10 +86,10 @@ function handleLogin() {
   proxy.$refs.loginRef.validate(valid => {
     if (valid) {
       loading.value = true
-      // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
+      // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码（不再前端加密）
       if (loginForm.value.rememberMe) {
         Cookies.set("username", loginForm.value.username, { expires: 30 })
-        Cookies.set("password", encrypt(loginForm.value.password), { expires: 30 })
+        Cookies.set("password", loginForm.value.password, { expires: 30 })
         Cookies.set("rememberMe", loginForm.value.rememberMe, { expires: 30 })
       } else {
         // 否则移除
@@ -129,37 +109,24 @@ function handleLogin() {
         router.push({ path: redirect.value || "/", query: otherQueryParams })
       }).catch(() => {
         loading.value = false
-        // 重新获取验证码
-        if (captchaEnabled.value) {
-          getCode()
-        }
+        // 验证码已移除
       })
     }
   })
 }
 
-function getCode() {
-  getCodeImg().then(res => {
-    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled
-    if (captchaEnabled.value) {
-      codeUrl.value = "data:image/gif;base64," + res.img
-      loginForm.value.uuid = res.uuid
-    }
-  })
-}
-
+// 验证码已移除
 function getCookie() {
   const username = Cookies.get("username")
   const password = Cookies.get("password")
   const rememberMe = Cookies.get("rememberMe")
   loginForm.value = {
     username: username === undefined ? loginForm.value.username : username,
-    password: password === undefined ? loginForm.value.password : decrypt(password),
+    password: password === undefined ? loginForm.value.password : password,
     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
   }
 }
 
-getCode()
 getCookie()
 </script>
 
@@ -227,3 +194,4 @@ getCookie()
   padding-left: 12px;
 }
 </style>
+
