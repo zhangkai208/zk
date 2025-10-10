@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.core.cache.EhCacheUtil;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.CacheUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.service.ISysUserOnlineService;
@@ -35,20 +34,15 @@ public class SysUserOnlineController extends BaseController
     @Autowired
     private ISysUserOnlineService userOnlineService;
 
-    @Autowired
-    private EhCacheUtil ehCacheUtil;
-
     @PreAuthorize("@ss.hasPermi('monitor:online:list')")
     @GetMapping("/list")
     public TableDataInfo list(String ipaddr, String userName)
     {
-        // EhCache不支持keys操作，这里需要重新实现
-        // 暂时返回空列表，实际项目中可能需要维护一个在线用户列表
-        Collection<String> keys = List.of();
+        Collection<String> keys = CacheUtils.getkeys("login_tokens");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys)
         {
-            LoginUser user = ehCacheUtil.getCacheObject("login_tokens", key);
+            LoginUser user = CacheUtils.get("login_tokens", key, LoginUser.class);
             if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName))
             {
                 userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
@@ -79,7 +73,7 @@ public class SysUserOnlineController extends BaseController
     @DeleteMapping("/{tokenId}")
     public AjaxResult forceLogout(@PathVariable String tokenId)
     {
-        ehCacheUtil.deleteObject("login_tokens", CacheConstants.LOGIN_TOKEN_KEY + tokenId);
+        CacheUtils.removeIfPresent("login_tokens", tokenId);
         return success();
     }
 }

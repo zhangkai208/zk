@@ -23,6 +23,7 @@ com\ruoyi\common\utils\http\HttpUtils$TrustAnyHostnameVerifier.class
 com\ruoyi\common\exception\file\FileSizeLimitExceededException.class
 com\ruoyi\common\utils\Arith.class
 com\ruoyi\common\annotation\Excel$ColumnType.class
+com\ruoyi\common\utils\CacheUtils.class
 com\ruoyi\common\annotation\DataScope.class
 com\ruoyi\common\core\domain\entity\SysDictType.class
 com\ruoyi\common\core\text\StrFormatter.class

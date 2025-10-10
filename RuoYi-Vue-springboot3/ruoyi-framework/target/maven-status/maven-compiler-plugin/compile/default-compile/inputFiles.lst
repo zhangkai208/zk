@@ -3,13 +3,17 @@ C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\ja
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\aspectj\LogAspect.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\aspectj\RateLimiterAspect.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ApplicationConfig.java
+C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\CacheShutdownHandler.java
+C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\CacheWarmupRunner.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\DruidConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\EhCacheConfig.java
+C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\FastJson2JsonRedisSerializer.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\FilterConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\I18nConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\MyBatisConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\properties\DruidProperties.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\properties\PermitAllUrlProperties.java
+C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\RedisConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ResourcesConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\SecurityConfig.java
 C:\Users\张恺\Desktop\ry-vue\RuoYi-Vue-springboot3\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ServerConfig.java
