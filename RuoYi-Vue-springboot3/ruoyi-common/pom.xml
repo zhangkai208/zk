@@ -95,17 +95,24 @@
             <artifactId>jaxb-api</artifactId>
         </dependency>
 
-        <!-- redis 缓存操作 -->
+        <!-- ehcache 缓存操作 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
-
-        <!-- pool 对象池 -->
+        
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <classifier>jakarta</classifier>
         </dependency>
+        
+        <!-- JCache API (JSR-107) -->
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+        
 
         <!-- 解析客户端操作系统、浏览器等 -->
         <dependency>

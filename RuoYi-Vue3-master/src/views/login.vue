@@ -127,7 +127,12 @@ function getCookie() {
   }
 }
 
-getCookie()
+// 临时清除Cookie，解决密码加密问题
+Cookies.remove("username")
+Cookies.remove("password")
+Cookies.remove("rememberMe")
+
+// getCookie() // 暂时注释掉，避免读取旧的加密密码
 </script>
 
 <style lang='scss' scoped>

@@ -8,12 +8,12 @@ package com.ruoyi.common.constant;
 public class CacheConstants
 {
     /**
-     * 登录用户 redis key
+     * 登录用户 cache key
      */
     public static final String LOGIN_TOKEN_KEY = "login_tokens:";
 
     /**
-     * 验证码 redis key
+     * 验证码 cache key
      */
     public static final String CAPTCHA_CODE_KEY = "captcha_codes:";
 
@@ -28,17 +28,17 @@ public class CacheConstants
     public static final String SYS_DICT_KEY = "sys_dict:";
 
     /**
-     * 防重提交 redis key
+     * 防重提交 cache key
      */
     public static final String REPEAT_SUBMIT_KEY = "repeat_submit:";
 
     /**
-     * 限流 redis key
+     * 限流 cache key
      */
     public static final String RATE_LIMIT_KEY = "rate_limit:";
 
     /**
-     * 登录账户密码错误次数 redis key
+     * 登录账户密码错误次数 cache key
      */
     public static final String PWD_ERR_CNT_KEY = "pwd_err_cnt:";
 }

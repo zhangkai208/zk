@@ -22,10 +22,9 @@ const useUserStore = defineStore(
       login(userInfo) {
         const username = userInfo.username.trim()
         const password = userInfo.password
-        const code = userInfo.code
-        const uuid = userInfo.uuid
+        
         return new Promise((resolve, reject) => {
-          login(username, password, code, uuid).then(res => {
+          login(username, password).then(res => {
             setToken(res.token)
             this.token = res.token
             resolve()
@@ -43,9 +42,9 @@ const useUserStore = defineStore(
             if (!isHttp(avatar)) {
               avatar = (isEmpty(avatar)) ? defAva : import.meta.env.VITE_APP_BASE_API + avatar
             }
-            if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-              this.roles = res.roles
-              this.permissions = res.permissions
+            if (res.roles && (Array.isArray(res.roles) ? res.roles.length > 0 : Object.keys(res.roles).length > 0)) { // 验证返回的roles是否是一个非空数组或对象
+              this.roles = Array.isArray(res.roles) ? res.roles : Object.keys(res.roles)
+              this.permissions = Array.isArray(res.permissions) ? res.permissions : Object.keys(res.permissions)
             } else {
               this.roles = ['ROLE_DEFAULT']
             }

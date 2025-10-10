@@ -5,7 +5,7 @@ import java.util.List;
 import com.alibaba.fastjson2.JSONArray;
 import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.core.domain.entity.SysDictData;
-import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.core.cache.EhCacheUtil;
 import com.ruoyi.common.utils.spring.SpringUtils;
 
 /**
@@ -28,7 +28,7 @@ public class DictUtils
      */
     public static void setDictCache(String key, List<SysDictData> dictDatas)
     {
-        SpringUtils.getBean(RedisCache.class).setCacheObject(getCacheKey(key), dictDatas);
+        SpringUtils.getBean(EhCacheUtil.class).setCacheObject("sys_dict", getCacheKey(key), dictDatas);
     }
 
     /**
@@ -39,10 +39,17 @@ public class DictUtils
      */
     public static List<SysDictData> getDictCache(String key)
     {
-        JSONArray arrayCache = SpringUtils.getBean(RedisCache.class).getCacheObject(getCacheKey(key));
-        if (StringUtils.isNotNull(arrayCache))
+        Object cacheObject = SpringUtils.getBean(EhCacheUtil.class).getCacheObject("sys_dict", getCacheKey(key));
+        if (StringUtils.isNotNull(cacheObject))
         {
-            return arrayCache.toList(SysDictData.class);
+            if (cacheObject instanceof List)
+            {
+                return (List<SysDictData>) cacheObject;
+            }
+            else if (cacheObject instanceof JSONArray)
+            {
+                return ((JSONArray) cacheObject).toList(SysDictData.class);
+            }
         }
         return null;
     }
@@ -214,7 +221,7 @@ public class DictUtils
      */
     public static void removeDictCache(String key)
     {
-        SpringUtils.getBean(RedisCache.class).deleteObject(getCacheKey(key));
+        SpringUtils.getBean(EhCacheUtil.class).deleteObject("sys_dict", getCacheKey(key));
     }
 
     /**
@@ -222,8 +229,7 @@ public class DictUtils
      */
     public static void clearDictCache()
     {
-        Collection<String> keys = SpringUtils.getBean(RedisCache.class).keys(CacheConstants.SYS_DICT_KEY + "*");
-        SpringUtils.getBean(RedisCache.class).deleteObject(keys);
+        SpringUtils.getBean(EhCacheUtil.class).clearCache("sys_dict");
     }
 
     /**

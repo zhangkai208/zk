@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.model.LoginUser;
-import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.core.cache.EhCacheUtil;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.ip.AddressUtils;
@@ -52,7 +52,7 @@ public class TokenService
     private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
 
     @Autowired
-    private RedisCache redisCache;
+    private EhCacheUtil ehCacheUtil;
 
     /**
      * 获取用户身份信息
@@ -71,7 +71,7 @@ public class TokenService
                 // 解析对应的权限以及用户信息
                 String uuid = (String) claims.get(Constants.LOGIN_USER_KEY);
                 String userKey = getTokenKey(uuid);
-                LoginUser user = redisCache.getCacheObject(userKey);
+                LoginUser user = ehCacheUtil.getCacheObject("login_tokens", userKey);
                 return user;
             }
             catch (Exception e)
@@ -101,7 +101,7 @@ public class TokenService
         if (StringUtils.isNotEmpty(token))
         {
             String userKey = getTokenKey(token);
-            redisCache.deleteObject(userKey);
+            ehCacheUtil.deleteObject("login_tokens", userKey);
         }
     }
 
@@ -151,7 +151,7 @@ public class TokenService
         loginUser.setExpireTime(loginUser.getLoginTime() + expireTime * MILLIS_MINUTE);
         // 根据uuid将loginUser缓存
         String userKey = getTokenKey(loginUser.getToken());
-        redisCache.setCacheObject(userKey, loginUser, expireTime, TimeUnit.MINUTES);
+        ehCacheUtil.setCacheObject("login_tokens", userKey, loginUser, expireTime, TimeUnit.MINUTES);
     }
 
     /**
