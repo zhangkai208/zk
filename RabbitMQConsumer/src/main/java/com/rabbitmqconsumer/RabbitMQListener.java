@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-@RabbitListener(queues = {"topic"})
+@RabbitListener(queues = {"queue1", "queue2"})
 public class RabbitMQListener {
     @RabbitHandler
     public void process(Map map) {
-        System.out.println("接收到：" + map.toString()
-);
+        System.out.println("接收到消息：" + map.toString());
     }
 }

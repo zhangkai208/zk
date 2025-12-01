@@ -2,7 +2,6 @@ package com.rabbitmq.controller;
 
 import com.rabbitmq.service.RabbitMQService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,5 +16,8 @@ public class RabbitMQController {
     public String sendMsg(@RequestParam(name = "msg") String msg) throws Exception {
         return rabbitMQService.sendMsg(msg);
     }
-
+    @PostMapping("/publish")
+    public String publish(@RequestParam(name = "msg") String msg) throws Exception {
+        return rabbitMQService.sendFanoutMsg(msg);
+    }
 }
