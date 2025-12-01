@@ -55,4 +55,26 @@ public class DirectRabbitConfig {
         return BindingBuilder.bind(queue2()).to(topicExchange())
                 .with("b.*");
     }
+    
+    // Headers Exchange 配置
+    @Bean
+    public HeadersExchange headersExchange(){
+        return new HeadersExchange(RabbitMQConfig.HEADERS_EXCHANGE_NAME, true, false);
+    }
+    
+    // queue1 绑定到 HeadersExchange，匹配规则：x-match=all，需要所有header都匹配
+    @Bean
+    public Binding headersBinding1(){
+        return BindingBuilder.bind(queue1())
+                .to(headersExchange())
+                .whereAll("type", "format").exist();  // type 和 format 都必须存在
+    }
+    
+    // queue2 绑定到 HeadersExchange，匹配规则：x-match=any，任意header匹配即可
+    @Bean
+    public Binding headersBinding2(){
+        return BindingBuilder.bind(queue2())
+                .to(headersExchange())
+                .whereAny("priority").exist();  // 只要有 priority 就匹配
+    }
 }

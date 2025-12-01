@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/rabbitmq")
 public class RabbitMQController {
@@ -25,5 +28,17 @@ public class RabbitMQController {
     public String sendTopicMsg(@RequestParam(name = "msg") String msg,
                                @RequestParam(name = "routingKey") String routingKey) throws Exception {
         return rabbitMQService.sendTopicMsg(msg, routingKey);
+    }
+    
+    @PostMapping("/sendHeadersMsg")
+    public String sendHeadersMsg(@RequestParam(name = "msg") String msg,
+                                 @RequestParam(name = "type", required = false) String type,
+                                 @RequestParam(name = "format", required = false) String format,
+                                 @RequestParam(name = "priority", required = false) String priority) throws Exception {
+        Map<String, Object> headers = new HashMap<>();
+        if (type != null) headers.put("type", type);
+        if (format != null) headers.put("format", format);
+        if (priority != null) headers.put("priority", priority);
+        return rabbitMQService.sendHeadersMsg(msg, headers);
     }
 }
