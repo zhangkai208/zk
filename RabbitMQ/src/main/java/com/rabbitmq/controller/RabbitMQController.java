@@ -20,4 +20,10 @@ public class RabbitMQController {
     public String publish(@RequestParam(name = "msg") String msg) throws Exception {
         return rabbitMQService.sendFanoutMsg(msg);
     }
+    
+    @PostMapping("/sendTopicMsg")
+    public String sendTopicMsg(@RequestParam(name = "msg") String msg,
+                               @RequestParam(name = "routingKey") String routingKey) throws Exception {
+        return rabbitMQService.sendTopicMsg(msg, routingKey);
+    }
 }

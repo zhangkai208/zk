@@ -30,6 +30,7 @@ public class RabbitMQServiceImpl implements RabbitMQService {
             return "error";
         }
     }
+    
     @Override
     public String sendFanoutMsg(String msg) throws Exception {
         try {
@@ -41,6 +42,20 @@ public class RabbitMQServiceImpl implements RabbitMQService {
             return "error";
         }
     }
+    
+    @Override
+    public String sendTopicMsg(String msg, String routingKey) throws Exception {
+        try {
+            Map<String, Object> message = getMessage(msg);
+            // 发送到TopicExchange，使用指定的routing key
+            rabbitTemplate.convertAndSend(RabbitMQConfig.TOPIC_EXCHANGE_NAME, routingKey, message);
+            return "ok";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+    
     //组装消息体
     private Map<String, Object> getMessage(String msg) {
         String msgId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
