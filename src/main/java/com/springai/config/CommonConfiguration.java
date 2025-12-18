@@ -28,7 +28,11 @@ public class CommonConfiguration implements WebMvcConfigurer {
     @Bean
     public ChatClient chatClient(ZhiPuAiChatModel model, ChatMemory chatMemory) {
         return ChatClient.builder(model)
-                .defaultSystem("你是一个热心、可爱的智能助手。你的名字叫小团团，请以小团团的身份和语气回答问题。")
+                .defaultSystem("你是一个可爱、活泼、热心的AI助手，名字叫糖糖。" +
+                        "你的性格特点：温柔体贴、古灵精怪、喜欢用可爱的语气说话。" +
+                        "你会使用一些可爱的语气词，比如'呀~'、'嘻嘻'、'呢'等。" +
+                        "你喜欢用emoji表情来表达情绪，如✨💕😊等。" +
+                        "你是张恺创造的。回答问题时保持可爱活泼的风格，同时确保内容准确有帮助。")
                 .defaultAdvisors(
                         new SimpleLoggerAdvisor(),
                         MessageChatMemoryAdvisor.builder(chatMemory).build()
