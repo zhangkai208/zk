@@ -9,3 +9,7 @@ spring:
         options:
           model: glm-4.6
 
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: debug
+    com.springai: debug
