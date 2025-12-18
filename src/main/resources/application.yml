@@ -8,7 +8,11 @@ spring:
       chat:
         options:
           model: glm-4.6
-
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springai?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
 logging:
   level:
     org.springframework.ai.chat.client.advisor: debug

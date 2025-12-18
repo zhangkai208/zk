@@ -108,57 +108,88 @@ const userInput = ref('')
 const isLoading = ref(false)
 const currentChatId = ref(null)
 const chatHistory = ref([])
+const currentMessages = ref([])
 const messagesContainer = ref(null)
 const inputField = ref(null)
 
-// 从localStorage加载聊天记录
-onMounted(() => {
-  const saved = localStorage.getItem('chatHistory')
-  if (saved) {
-    chatHistory.value = JSON.parse(saved)
-    if (chatHistory.value.length > 0) {
-      currentChatId.value = chatHistory.value[0].id
+// 从后端加载会话列表
+const loadConversations = async () => {
+  try {
+    const response = await fetch('/api/conversations')
+    if (response.ok) {
+      chatHistory.value = await response.json()
+      // 自动选择第一个会话
+      if (chatHistory.value.length > 0 && !currentChatId.value) {
+        selectChat(chatHistory.value[0].id)
+      }
     }
+  } catch (error) {
+    console.error('加载会话列表失败:', error)
   }
-})
-
-// 保存到localStorage
-const saveToStorage = () => {
-  localStorage.setItem('chatHistory', JSON.stringify(chatHistory.value))
 }
 
-// 当前聊天的消息
-const currentMessages = computed(() => {
-  const chat = chatHistory.value.find(c => c.id === currentChatId.value)
-  return chat ? chat.messages : []
+// 加载会话消息
+const loadMessages = async (conversationId) => {
+  try {
+    const response = await fetch(`/api/conversations/${conversationId}/messages`)
+    if (response.ok) {
+      currentMessages.value = await response.json()
+      scrollToBottom()
+    }
+  } catch (error) {
+    console.error('加载消息失败:', error)
+  }
+}
+
+// 初始化
+onMounted(() => {
+  loadConversations()
 })
 
 // 创建新对话
-const createNewChat = () => {
-  const newChat = {
-    id: Date.now(),
-    title: '新对话 ' + (chatHistory.value.length + 1),
-    messages: []
+const createNewChat = async () => {
+  try {
+    const response = await fetch('/api/conversations', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: '新对话' })
+    })
+    if (response.ok) {
+      const newChat = await response.json()
+      chatHistory.value.unshift(newChat)
+      selectChat(newChat.id)
+    }
+  } catch (error) {
+    console.error('创建会话失败:', error)
   }
-  chatHistory.value.unshift(newChat)
-  currentChatId.value = newChat.id
-  saveToStorage()
 }
 
 // 选择聊天
-const selectChat = (id) => {
+const selectChat = async (id) => {
   currentChatId.value = id
+  await loadMessages(id)
 }
 
 // 删除聊天
-const deleteChat = (id) => {
-  const index = chatHistory.value.findIndex(c => c.id === id)
-  if (index > -1) {
-    chatHistory.value.splice(index, 1)
-    if (currentChatId.value === id) {
-      currentChatId.value = chatHistory.value.length > 0 ? chatHistory.value[0].id : null
+const deleteChat = async (id) => {
+  try {
+    const response = await fetch(`/api/conversations/${id}`, { method: 'DELETE' })
+    if (response.ok) {
+      const index = chatHistory.value.findIndex(c => c.id === id)
+      if (index > -1) {
+        chatHistory.value.splice(index, 1)
+        if (currentChatId.value === id) {
+          currentChatId.value = chatHistory.value.length > 0 ? chatHistory.value[0].id : null
+          if (currentChatId.value) {
+            await loadMessages(currentChatId.value)
+          } else {
+            currentMessages.value = []
+          }
+        }
+      }
     }
-    saveToStorage()
+  } catch (error) {
+    console.error('删除会话失败:', error)
   }
 }
 
@@ -174,17 +205,13 @@ const scrollToBottom = () => {
 // 格式化消息（支持简单的Markdown）
 const formatMessage = (text) => {
   if (!text) return ''
-  // 转义HTML
   let formatted = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
   
-  // 代码块
   formatted = formatted.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-  // 行内代码
   formatted = formatted.replace(/`([^`]+)`/g, '<code>$1</code>')
-  // 换行
   formatted = formatted.replace(/\n/g, '<br>')
   
   return formatted
@@ -197,30 +224,21 @@ const sendMessage = async () => {
 
   // 如果没有当前对话，创建一个
   if (!currentChatId.value) {
-    createNewChat()
+    await createNewChat()
   }
 
-  // 获取当前聊天
-  const currentChat = chatHistory.value.find(c => c.id === currentChatId.value)
-  if (!currentChat) return
-
-  // 添加用户消息
-  currentChat.messages.push({
+  // 添加用户消息到界面（乐观更新）
+  currentMessages.value.push({
     role: 'user',
     content: message
   })
-
-  // 更新对话标题（使用第一条消息）
-  if (currentChat.messages.length === 1) {
-    currentChat.title = message.substring(0, 20) + (message.length > 20 ? '...' : '')
-  }
 
   userInput.value = ''
   isLoading.value = true
   scrollToBottom()
 
   try {
-    // 调用后端API（流式响应），传递conversationId用于会话记忆
+    // 调用后端API（流式响应）
     const response = await fetch(`/ai/chat?message=${encodeURIComponent(message)}&conversationId=${currentChatId.value}`)
     
     if (!response.ok) {
@@ -228,8 +246,8 @@ const sendMessage = async () => {
     }
 
     // 添加AI消息占位
-    const aiMessageIndex = currentChat.messages.length
-    currentChat.messages.push({
+    const aiMessageIndex = currentMessages.value.length
+    currentMessages.value.push({
       role: 'assistant',
       content: ''
     })
@@ -250,16 +268,15 @@ const sendMessage = async () => {
       const lines = chunk.split('\n')
       for (const line of lines) {
         if (line.startsWith('data:')) {
-          const content = line.substring(5) // 去掉 "data:" 前缀
+          const content = line.substring(5)
           fullContent += content
         } else if (line.trim() !== '') {
-          // 如果不是SSE格式，直接添加
           fullContent += line
         }
       }
       
       // 使用Vue的响应式更新方式
-      currentChat.messages[aiMessageIndex] = {
+      currentMessages.value[aiMessageIndex] = {
         role: 'assistant',
         content: fullContent
       }
@@ -267,18 +284,17 @@ const sendMessage = async () => {
       scrollToBottom()
     }
 
-    saveToStorage()
+    // 重新加载会话列表以更新标题
+    await loadConversations()
 
   } catch (error) {
     console.error('发送消息失败:', error)
     isLoading.value = false
     
-    // 添加错误消息
-    currentChat.messages.push({
+    currentMessages.value.push({
       role: 'assistant',
       content: '抱歉，发生了错误：' + error.message
     })
-    saveToStorage()
   }
 
   scrollToBottom()
