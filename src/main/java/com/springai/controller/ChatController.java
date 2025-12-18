@@ -2,6 +2,7 @@ package com.springai.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +16,13 @@ public class ChatController {
     private final ChatClient chatClient;
 
     @RequestMapping(value = "/chat", produces = "text/event-stream;charset=utf-8")
-    public Flux<String> chat(@RequestParam String message) {
+    public Flux<String> chat(
+            @RequestParam String message,
+            @RequestParam(defaultValue = "default") String conversationId) {
         return chatClient.prompt()
-                .user(message)  // 使用用户传入的message
+                .user(message)
+                .advisors(advisor -> advisor
+                        .param(ChatMemory.CONVERSATION_ID, conversationId))
                 .stream()
                 .content();
     }

@@ -220,8 +220,8 @@ const sendMessage = async () => {
   scrollToBottom()
 
   try {
-    // 调用后端API（流式响应）
-    const response = await fetch(`/ai/chat?message=${encodeURIComponent(message)}`)
+    // 调用后端API（流式响应），传递conversationId用于会话记忆
+    const response = await fetch(`/ai/chat?message=${encodeURIComponent(message)}&conversationId=${currentChatId.value}`)
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
