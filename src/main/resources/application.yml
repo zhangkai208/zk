@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: springAI
+  ai:
+    zhipuai:
+      base-url: https://open.bigmodel.cn/api/paas
+      api-key:
+      chat:
+        options:
+          model: glm-4.6
+
