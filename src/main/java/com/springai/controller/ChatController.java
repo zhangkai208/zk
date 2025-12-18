@@ -14,7 +14,7 @@ public class ChatController {
 
     private final ChatClient chatClient;
 
-    @RequestMapping(value = "/chat",produces = "text/html;charset=utf-8")
+    @RequestMapping(value = "/chat", produces = "text/event-stream;charset=utf-8")
     public Flux<String> chat(@RequestParam String message) {
         return chatClient.prompt()
                 .user(message)  // 使用用户传入的message
